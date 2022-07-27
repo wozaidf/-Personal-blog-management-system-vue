@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="lk">
+        <div style="height:200px"></div>
         <div class="head">
             <a href="http://www.baidu.com" target="_blank" class="picture">
                 <svg t="1657338474762" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -69,46 +70,65 @@
             </div>
         </div>
         <div class="dengluyangshi">
-                <el-button class="denglu" @click="login">登录</el-button>
-            </div>
+            <el-button class="denglu" @click="login">登录</el-button>
+        </div>
 
 
 
     </div>
 </template>
 <script>
+// import axios from 'axios'
+// import ShareStore from '@/store/index.js'
 export default {
+
     name: 'Login',
     data: function () {
         return {
             username: "",
             password: '',
+            // loginData: ShareStore
 
         }
     },
     methods: {
-        login() {
+        // async login() {
+        //     //网络请求拿token
+        //     const res = await axios.get("http://learn.api.futureruntime.com/");
+        //     this.loginData.setAction("token", res.data.data.token); //从网络请求拿到token，并将token存入组件存储中
+           
+           // console.log(res.data.data.token)
             //路由守卫
             //用在浏览器中存入数据的方法来判断用户是通过login来进入home的，而非直接修改路径。
-            const token = 'wzdf'
-            sessionStorage.setItem('token',token)    //第一个是key，第二个为value
+            // const token = 'wzdf'
+            // sessionStorage.setItem('token',token)    //第一个是key，第二个为value
             // 待解决：ToDo: 用户信息验证
-            this.$notify({
-                title: "成功",
-                message: "您已成功登录，已成功为您跳转至控制台",
-                type: "success",
-            })
-            this.$router.push('/home')   //编程式路由跳转
-        }
+            
+            // this.$notify({
+            //     title: "成功",
+            //     message: "您已成功登录，已成功为您跳转至控制台",
+            //     type: "success",
+            // })
+            login(){
+                this.$router.push('/home')
+            }
+               //编程式路由跳转
+        },
+
     }
 
-}
+
 </script>
 <style  lang="scss">
 .el-input {
     margin-top: 10px;
 
 
+}
+
+.lk {
+    background-color: bisque;
+    height: 770px;
 }
 
 .dengru {
@@ -132,7 +152,8 @@ export default {
     display: flex;
     justify-content: center;
 }
-.dengluyangshi{
+
+.dengluyangshi {
     display: flex;
     justify-content: center;
     margin: 20px;

@@ -75,7 +75,6 @@
       </div>
     </div>
     <div class="body">
-
       <div class="side">
         <el-menu default-active="2" class="el-menu-vertical-demo">
           <el-menu-item index="1" @click="info('self')">
@@ -84,7 +83,9 @@
           </el-menu-item>
           <el-menu-item index="2" @click="info('CandyLib')">
             <i class="el-icon-document"></i>
-            <span slot="title">糖果库</span>
+            <span slot="title">
+              糖果库
+            </span>
           </el-menu-item>
           <el-menu-item index="3" @click="info('UnKown')">
             <i class="el-icon-setting"></i>
@@ -92,29 +93,46 @@
           </el-menu-item>
         </el-menu>
       </div>
-      <div class="content"><router-view /></div>
-          <!-- <router-view/>  引入其子组件 -->
+      <div class="content">
+        <router-view />
+      </div>
+      <!-- <router-view/>  引入其子组件 -->
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
+// @ is an alias to /src
+import EventBus from '@/bus'
+// import AppVue from '@/App.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
+// import ShareStore from "@/store/index.js"
 export default {
+  mounted() {
+    //在生命周期上监听事件的发生
+    EventBus.$on('giveMoney', (data) => {
+      console.log('@@', data.count)
+    })
+  },
+  provide: {
+    money: "100000",
+  },
   name: 'HomeView',
   components: {
     HelloWorld
   },
   methods: {
     logout() {
-      sessionStorage.removeItem('token')
+      // ShareStore.clearAction('token')
+
+      // sessionStorage.removeItem('token')
       this.$router.push('/login')
     },
     info(path) {
       this.$router.push(`/home/${path}`)
-    }
+    },
+
   }
 }
 </script>
@@ -124,9 +142,16 @@ export default {
   padding: 0;
 }
 
+.container {
+  height: 100%;
+}
+
+
 .side {
-  background-color: bisque;
   width: 240px;
+  .el-menu-vertical-demo{
+    height: 100%;
+  }
 }
 
 .header {
@@ -134,6 +159,9 @@ export default {
   background-color: rgb(141, 30, 210);
   display: flex;
 
+  .center {
+    flex-grow: 1;
+  }
 
   .center {
     flex-grow: 1;
@@ -164,7 +192,15 @@ export default {
     cursor: pointer;
   }
 }
-  .body {
-    display: flex;
-  }
+
+.body {
+  display: flex;
+  height: calc(100% - 60px)
+}
+
+.content {
+  width: 100%;
+  height: 100%
+}
+
 </style>
