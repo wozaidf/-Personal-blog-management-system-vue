@@ -20,6 +20,9 @@ export default {
 },
   mounted() {
     EventBus.$emit('giveMoney', { count: 123 })
+  //   setTimeout(() => {
+  //   this.$i18n.locale='en'
+  // }, 3000);
   }
 }
 </script>
@@ -44,6 +47,8 @@ export default {
 //     }
 //   }
 // }
+
+
 </style>
 <style>
 * {

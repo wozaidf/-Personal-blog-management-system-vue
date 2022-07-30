@@ -1,6 +1,26 @@
 <template>
     <div class="lk">
-        <div style="height:200px"></div>
+        <div class='head'>
+            <div class="right"></div>
+            <div class="nav">
+                <el-dropdown >
+                    <span class="el-dropdown-link">
+                        切换语言<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <div @click="switcha('en')">
+                            <el-dropdown-item>英语</el-dropdown-item>
+                        </div>
+                        <div @click="switcha('zh')">
+                            <el-dropdown-item>中文</el-dropdown-item>
+                        </div>
+                        <div @click="switcha('ja')">
+                            <el-dropdown-item>日语</el-dropdown-item>
+                        </div>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
+        </div>
         <div class="head">
             <a href="http://www.baidu.com" target="_blank" class="picture">
                 <svg t="1657338474762" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -60,7 +80,7 @@
             </a>
         </div>
         <div class="dengru">
-            <h2>登录界面</h2>
+            <h2>{{ $t('message.loginin') }}</h2>
         </div>
 
         <div class="ody">
@@ -70,7 +90,7 @@
             </div>
         </div>
         <div class="dengluyangshi">
-            <el-button class="denglu" @click="login">登录</el-button>
+            <el-button class="denglu" @click="login">{{ $t('message.login') }}</el-button>
         </div>
 
 
@@ -92,30 +112,33 @@ export default {
         }
     },
     methods: {
+        switcha(langague) {
+            this.$i18n.locale = langague
+        },
         // async login() {
         //     //网络请求拿token
         //     const res = await axios.get("http://learn.api.futureruntime.com/");
         //     this.loginData.setAction("token", res.data.data.token); //从网络请求拿到token，并将token存入组件存储中
-           
-           // console.log(res.data.data.token)
-            //路由守卫
-            //用在浏览器中存入数据的方法来判断用户是通过login来进入home的，而非直接修改路径。
-            // const token = 'wzdf'
-            // sessionStorage.setItem('token',token)    //第一个是key，第二个为value
-            // 待解决：ToDo: 用户信息验证
-            
-            // this.$notify({
-            //     title: "成功",
-            //     message: "您已成功登录，已成功为您跳转至控制台",
-            //     type: "success",
-            // })
-            login(){
-                this.$router.push('/home')
-            }
-               //编程式路由跳转
-        },
 
-    }
+        // console.log(res.data.data.token)
+        //路由守卫
+        //用在浏览器中存入数据的方法来判断用户是通过login来进入home的，而非直接修改路径。
+        // const token = 'wzdf'
+        // sessionStorage.setItem('token',token)    //第一个是key，第二个为value
+        // 待解决：ToDo: 用户信息验证
+
+        // this.$notify({
+        //     title: "成功",
+        //     message: "您已成功登录，已成功为您跳转至控制台",
+        //     type: "success",
+        // })
+        login() {
+            this.$router.push('/home')
+        }
+        //编程式路由跳转
+    },
+
+}
 
 
 </script>
@@ -129,6 +152,14 @@ export default {
 .lk {
     background-color: bisque;
     height: 770px;
+
+    .head {
+        display: flex;
+
+        .right {
+            flex-grow: 1;
+        }
+    }
 }
 
 .dengru {
@@ -157,5 +188,25 @@ export default {
     display: flex;
     justify-content: center;
     margin: 20px;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+.el-icon-arrow-down {
+    font-size: 12px;
+}
+
+
+.nav {
+    // background-color: aquamarine;
+    // width: fit-content;
+    // border: 1px ;
+    // border-radius: 4px
+    display: flex;
+    margin: 20px 20px 0 0;
+
 }
 </style>

@@ -7,8 +7,41 @@ Vue.config.productionTip = false
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+// 引入 vue-l18n
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+const messages={
+  en:{
+    message:{
+      login:'login',
+      loginin:'Login interface'
+    }
+  },
+  ja:{
+    message:{
+      login:"ログイン",
+      loginin:'ログインインタフェース'
+    }
+  },
+  zh:{
+    message:{
+      login:"登录",
+      loginin:'登入界面'
+    }
+  }
+}
+
+const i18n = new VueI18n({
+  locale: 'zh', // set locale
+  messages, // set locale messages
+})
+
+
+
 
 new Vue({
-  router:router,
-  render: h => h(App)
+  router: router,
+  render: h => h(App),
+  i18n
 }).$mount('#app')

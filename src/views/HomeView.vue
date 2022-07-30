@@ -163,9 +163,6 @@ export default {
     flex-grow: 1;
   }
 
-  .center {
-    flex-grow: 1;
-  }
 
   .left {
     width: 150px;
