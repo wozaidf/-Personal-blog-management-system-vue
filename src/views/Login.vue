@@ -1,6 +1,6 @@
 <template>
     <div class="lk">
-        <div class='head'>
+        <div class='headq'>
             <div class="right"></div>
             <div class="nav">
                 <el-dropdown >
@@ -153,11 +153,13 @@ export default {
     background-color: bisque;
     height: 770px;
 
-    .head {
+    .headq {
         display: flex;
+        height: 50px;
 
         .right {
             flex-grow: 1;
+            height: 50px;
         }
     }
 }
@@ -172,6 +174,7 @@ export default {
     display: flex;
     justify-content: center;
     height: 100px;
+    margin-top: 100px;
 
     .picture {
         display: flex;
