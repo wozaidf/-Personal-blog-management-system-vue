@@ -3,7 +3,7 @@
         <div class='headq'>
             <div class="right"></div>
             <div class="nav">
-                <el-dropdown >
+                <el-dropdown>
                     <span class="el-dropdown-link">
                         切换语言<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
@@ -99,6 +99,7 @@
 </template>
 <script>
 // import axios from 'axios'
+import http from '@/sreve/index.js'
 // import ShareStore from '@/store/index.js'
 export default {
 
@@ -107,6 +108,7 @@ export default {
         return {
             username: "",
             password: '',
+
             // loginData: ShareStore
 
         }
@@ -119,7 +121,36 @@ export default {
         //     //网络请求拿token
         //     const res = await axios.get("http://learn.api.futureruntime.com/");
         //     this.loginData.setAction("token", res.data.data.token); //从网络请求拿到token，并将token存入组件存储中
-
+        // 1.url里面有路径参数
+        // 2.config对象中依次为
+        // 2.1 params 查询参数
+        // 2.2 headers 配置我们的请求头部
+        // 2.3 data 部分配置我们的请求体
+        async login() {
+            //pathparams为url里面的路径参数
+            // /login?username=lk&password=2002
+            const pathparams = 1;
+            //get方法不允许有请求体所以这里用post
+            const res = await http.post(`/pet/${pathparams}`,
+                //请求体
+                { body: 'big' },
+                //params 为查询参数
+                { params: { name: 'lk', password: 2002 } },
+                //请求头部
+                { headers: { token: 'qwdadasasfgc' } },
+            )
+            if (res.data.code !== 0) {
+                this.$notify({
+                    title: '提示',
+                    message: '失败',
+                    duration: 0
+                });
+                return;
+            }
+            // this.loginData.setAction("token", res)
+            this.$router.push('/home')
+            // `http://127.0.0.1:4523/m1/1378007-0-default/pet?uesname=${usename}}&password=${password}`
+        },
         // console.log(res.data.data.token)
         //路由守卫
         //用在浏览器中存入数据的方法来判断用户是通过login来进入home的，而非直接修改路径。
@@ -132,9 +163,6 @@ export default {
         //     message: "您已成功登录，已成功为您跳转至控制台",
         //     type: "success",
         // })
-        login() {
-            this.$router.push('/home')
-        }
         //编程式路由跳转
     },
 
