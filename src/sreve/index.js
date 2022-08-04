@@ -4,7 +4,7 @@
 //3.BaseUrl
 //4.授权的头部字段  
 import axios from 'axios'
-const DEV_URL = 'http://127.0.0.1:4523/m1/1378007-0-default'       //测试的url
+const DEV_URL = 'http://localhost:8080'                            //测试的url
 const PRODUCTION_URL ='https://www.baidu.com/'                     //生产的url
 //用baseURL配置多个后台请求地址
 const http = axios.create({

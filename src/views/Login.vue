@@ -99,7 +99,8 @@
 </template>
 <script>
 // import axios from 'axios'
-import http from '@/sreve/index.js'
+// import http from '@/sreve/index.js'
+import LoginService from '@/sreve/login'
 // import ShareStore from '@/store/index.js'
 export default {
 
@@ -129,17 +130,19 @@ export default {
         async login() {
             //pathparams为url里面的路径参数
             // /login?username=lk&password=2002
-            const pathparams = 1;
+            // const pathparams = 1;
             //get方法不允许有请求体所以这里用post
-            const res = await http.post(`/pet/${pathparams}`,
-                //请求体
-                { body: 'big' },
-                //params 为查询参数
-                { params: { name: 'lk', password: 2002 } },
-                //请求头部
-                { headers: { token: 'qwdadasasfgc' } },
-            )
-            if (res.data.code !== 0) {
+            const res = await LoginService(this.username,this.password)
+            // http.post(`/login/`,null,
+            //     //请求体
+            //     // { body: 'big' },
+            //     //params 为查询参数
+            //     { params: { name: this.username, password: this.password } },
+            //     //请求头部
+            //     // { headers: { token: 'qwdadasasfgc' } },
+            // )
+            console.log(res)
+            if (!res.data.success) {
                 this.$notify({
                     title: '提示',
                     message: '失败',
