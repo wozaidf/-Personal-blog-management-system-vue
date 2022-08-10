@@ -126,7 +126,7 @@ export default {
     logout() {
       // ShareStore.clearAction('token')
 
-      // sessionStorage.removeItem('token')
+      sessionStorage.removeItem('token')
       this.$router.push('/login')
     },
     info(path) {

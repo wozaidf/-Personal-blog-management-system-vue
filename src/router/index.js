@@ -8,7 +8,7 @@ import UnKown from '../views/componet/UnKown.vue'
 import CandyLib from '../views/componet/CandyLib.vue'
 import Self from '../views/componet/Self.vue'
 const lwogin = () => import('../views/Login.vue')
-// import ShareStore from '@/store/index.js'
+import ShareStore from '@/store/index.js'
 
 Vue.use(VueRouter)
 
@@ -66,16 +66,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-//路由守卫
-// router.beforeEach((to, from, next) => {
-//   let token = ShareStore.getAction('token')
-//   if (to.path === '/' || to.path === '/login') {
-//     next();
-//   } else if (token) {
-//     next()
-//   } else {
-//     next('/login')
-//   }
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  // let token = ShareStore.getAction('token') //怎么拿token
+  let token =sessionStorage.getItem('token')
+  if (to.path === '/' || to.path === '/login') {
+    next();
+  } else if (token) {
+    next();
+  } else {//用户没有登录
+    next('/login')
+  }
+})
 
 
   // 这个地方，拿上token，取后端判断

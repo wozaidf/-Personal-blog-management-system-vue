@@ -136,7 +136,7 @@ export default {
             // http.post(`/login/`,null,
             //     //请求体
             //     // { body: 'big' },
-            //     //params 为查询参数
+            //     //params 
             //     { params: { name: this.username, password: this.password } },
             //     //请求头部
             //     // { headers: { token: 'qwdadasasfgc' } },
@@ -145,18 +145,21 @@ export default {
             if (!res.data.success) {
                 this.$notify({
                     title: '提示',
-                    message: '失败',
-                    duration: 0
+                    message: '登入失败',
+                    duration: 0,
                 });
                 return;
-            }
+            }//登入成功后
+            //将后端生成的token返回到前端并保存到sessionStorage中
+            sessionStorage.setItem("token", res.data.data.usertoken);
+            console.log(res)
             // this.loginData.setAction("token", res)
             this.$router.push('/home')
             // `http://127.0.0.1:4523/m1/1378007-0-default/pet?uesname=${usename}}&password=${password}`
         },
         // console.log(res.data.data.token)
         //路由守卫
-        //用在浏览器中存入数据的方法来判断用户是通过login来进入home的，而非直接修改路径。
+        //用在浏览器中存入token的方法来判断用户是通过login来进入home的，而非直接修改路径。
         // const token = 'wzdf'
         // sessionStorage.setItem('token',token)    //第一个是key，第二个为value
         // 待解决：ToDo: 用户信息验证
